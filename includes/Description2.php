@@ -51,7 +51,7 @@ class Description2 {
 		$desc = '';
 
 		$myText = $text;
-+		$stripTags = [ 'style', 'table' ];
++		$stripTags = [ 'style', 'table', 'aside' ];
 +		foreach ( $stripTags as $tag ) {
 +			$pattern = "%<$tag\b[^>]*+>(?:(?R)|[^<]*+(?:(?!</?$tag\b)<[^<]*+)*+)*+</$tag>%i";
 +			$myText = preg_replace( $pattern, '', $myText );
