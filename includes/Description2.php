@@ -50,8 +50,12 @@ class Description2 {
 	public static function onParserAfterTidy( Parser &$parser, &$text ) {
 		$desc = '';
 
-		$pattern = '%<table\b[^>]*+>(?:(?R)|[^<]*+(?:(?!</?table\b)<[^<]*+)*+)*+</table>%i';
-		$myText = preg_replace( $pattern, '', $text );
+		$myText = $text;
++		$stripTags = [ 'style', 'table' ];
++		foreach ( $stripTags as $tag ) {
++			$pattern = "%<$tag\b[^>]*+>(?:(?R)|[^<]*+(?:(?!</?$tag\b)<[^<]*+)*+)*+</$tag>%i";
++			$myText = preg_replace( $pattern, '', $myText );
++		}
 
 		$paragraphs = [];
 		if ( preg_match_all( '#<p>.*?</p>#is', $myText, $paragraphs ) ) {
